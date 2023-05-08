@@ -22,7 +22,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            background-color: #1d86d5;
+            background-color: #0253a4;
             color: white;
             padding: 20px;
             text-align: center;
@@ -33,37 +33,24 @@
         }       
 
 		.emptyBox {
-            background-color: #1d86d5;
-            padding: 250px;
+            background-color: #0253a4;
+            padding: 650px;
             width: 50%;
-            margin: 250px auto 0; /* adjust the top margin to move the box down */
-            text-align: center;
+            margin: 225px 0 0 50px; /* adjus /* adjust the top margin to move the box down */
+            text-align: left;
             border: 5px solid black;
 }
 
 		.footer {
 			height: 20px;
-			background-color: #1d86d5;
+			background-color: #0253a4;
 			padding: 20px;
 			box-sizing: border-box;
 		}
-
-        .sideBox {
-            background-color: #1d86d5;
-            color: white;
-            padding: 10px;
-            width: 10%;
-            position: absolute;
-            top: 300px;
-            bottom: 100px;
-            left: 1;
-            text-align: left;
-            border: 5px solid black;
-            overflow: auto;
-        }
 	</style>
 </head>
 <body>
+    <img src="static/nba-logo.jpg" style="position: absolute; top: 150px; right: 0px; transform: scale(0.5);">
 	<div class="wrapper">
 		<div class="header">
 			<h1>Welcome To The NBA Optimizer</h1>
@@ -72,8 +59,7 @@
 
 	    <div class="emptyBox">
 		</div>
-
-        <div class="sideBox">
+        <a href="{{ url_for('player') }}" style="color: white; position: absolute; top: 55px; left: 50px; font-size: 50px;">View Player</a>
         </div>
 	</div> <!-- end of wrapper -->
 
