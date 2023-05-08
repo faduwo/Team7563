@@ -1,37 +1,31 @@
 <!doctype html>
 <html lang="en">
   <head>
-    {% block head %}
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      {% block styles %}
-        {{ bootstrap.load_css() }}
-      {% endblock %}
       <title>CST 205 Final Project</title>
-    {% endblock %}
+      {{ bootstrap.load_css() }}
   </head>
-  <body>
+<body>
     <div class="container mb-4">  
       <div class="card mt-4">
         <div class="card-body">
-          <h2 class="card-title">Player Information:</h2>
-          <ul class="list-group">
-            {% if data %}
-              <p class="card-text">First Name: {{ data['first_name'] }}</p>
-              <p class="card-text">Last Name: {{ data['last_name'] }}</p>
-              <p class="card-text">Position: {{ data['position'] }}</p>
-              <p class="card-text">Height: {{ data['height_feet'] }} feet {{ data['height_inches'] }} inches</p>
-              <p class="card-text">Weight: {{ data['weight_pounds'] }} pounds</p>
-              <p class="card-text">Team: {{ data['team']['full_name'] }}</p>
-            {% else %}
-              <p class="card-text">No data</p>
-            {% endif %}
-          </ul>
-        </div>
-        <div class="card-footer">
-          <a href="{{ url_for('index') }}" class="card-link">Take me home</a>
+          <h2 class="card-title">Search for a Player:</h2>
+          <form method="POST">
+            {{ player_form.csrf_token }}
+            {{ player_form.player_id.label }} {{ player_form.player_id(size=10) }}
+            {{ player_form.submit }}
+          </form>
+          <h2 class="card-title">Search for a Team:</h2>
+          <form method="POST">
+            {{ team_form.csrf_token }}
+            {{ team_form.team_id.label }} {{ team_form.team_id(size=10) }}
+            {{ team_form.submit }}
+          </form>
         </div>
       </div>
+      <!-- Score board will go here -->
+    
     </div>
-  </body>
+</body>
 </html>
