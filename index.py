@@ -24,5 +24,10 @@ def player():
 
     return render_template('player.html', data=data)
 
+@app.route('/teams')
+def teams():
+    return render_template('teams.html')
+
+
 if __name__ == '__main__':
-    app.run()
+        app.run()
