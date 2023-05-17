@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    {% block head %}
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      {% block styles %}
+        {{ bootstrap.load_css() }}
+      {% endblock %}
+      <title>CST 205 Final Project</title>
+    {% endblock %}
+  </head>
+  <body>
+    <div class="container mb-4">  
+      <div class="card mt-4">
+        <div class="card-body">
+          <h2 class="card-title">Team Information:</h2>
+          <ul class="list-group">
+            {% if data %}
+              <p class="card-text">City: {{ data['city'] }}</p>
+              <p class="card-text">Conf: {{ data['conference'] }}</p>
+              <p class="card-text">Division: {{ data['division'] }}</p>
+              <p class="card-text">Name: {{ data['name'] }}</p>
+              <p class="card-text">Team Name: {{ data['full_name'] }}</p>
+            {% else %}
+              <p class="card-text">No data</p>
+            {% endif %}
+          </ul>
+        </div>
+        <div class="card-footer">
+          <a href="{{ url_for('index') }}" class="card-link">Take me home</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
