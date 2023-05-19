@@ -1,3 +1,11 @@
+# CST 205 Spring 23
+# Nba Optimizer
+# This program is used to find information on Nba basketball players and teams
+# Authors: Faraje Aduwo, Arshdeep Cheema, Julian Valencia, Luis Tapia
+# Github link: https://github.com/faduwo/Team7563
+#
+
+
 from flask import Flask, render_template, url_for, redirect
 import requests
 from flask_bootstrap import Bootstrap
@@ -10,7 +18,9 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'csumb-otter'
 bootstrap = Bootstrap(app)
 
+#api endpoints 
 player_endpoint = 'https://www.balldontlie.io/api/v1/players/'
+player_search = 'https://balldontlie.io/api/v1/players?search='
 team_endpoint = 'https://www.balldontlie.io/api/v1/teams/'
 game_endpoint = 'https://www.balldontlie.io/api/v1/games/'
 
@@ -24,6 +34,7 @@ class TeamSearch(FlaskForm):
     team_id = StringField('Team ID', validators=[DataRequired()])
     submit = SubmitField('Search')
 
+#Route for main page
 @app.route('/', methods=['GET', 'POST'])
 def index():
     player_form = PlayerSearch()
@@ -37,7 +48,8 @@ def index():
         team_id = team_form.team_id.data
         return redirect(url_for('team_info', team_id=team_id))
     
-    game_id = random.randint(10, 9999)
+    #game of the day random game generation
+    game_id = random.randint(1000, 35000)
     try:
         url = game_endpoint + str(game_id)
         r = requests.get(url)
@@ -47,18 +59,18 @@ def index():
 
     return render_template('index.html', player_form=player_form, team_form=team_form, game_data=game_data)
 
-#Route to player_info.html
+#Route to player_search.html
 @app.route('/player/<player_id>')
 def player_info(player_id):
     try:
-        url = player_endpoint + str(player_id)
+        url = player_search + str(player_id)
         r = requests.get(url)
         data = r.json()
         print(data)
     except:
         print('Please try again')
 
-    return render_template('player_info.html', data=data)
+    return render_template('player_search.html', data=data['data'])
 
 #Route to team_info.html
 @app.route('/team/<team_id>')
@@ -72,6 +84,19 @@ def team_info(team_id):
         print('Please try again')
 
     return render_template('team_info.html', data=data)
+
+#Route to player_info.html
+@app.route('/findplayer/<player_id>')
+def find_player(player_id):
+    try:
+        url = player_endpoint + str(player_id)
+        r = requests.get(url)
+        data = r.json()
+        print(data)
+    except:
+        print('Please try again')
+
+    return render_template('player_info.html', data=data)
 
 #Random player
 @app.route('/player')
