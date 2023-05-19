@@ -85,7 +85,7 @@ def player():
     except:
         print('Please try again')
 
-    return render_template('view_player.html', data=data)
+    return render_template('player_info.html', data=data)
 
 #View teams
 @app.route('/teams')
