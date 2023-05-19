@@ -1,3 +1,11 @@
+<!--
+# CST 205 Spring 23
+# Nba Optimizer
+# This program is used to find information on Nba basketball players and teams
+# Authors: Faraje Aduwo, Arshdeep Cheema, Julian Valencia, Luis Tapia
+# Github link: https://github.com/faduwo/Team7563
+-->
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -22,9 +30,13 @@
         <h3>Game of the Day</h3>
         {% if game_data %}
           <h2>
+            <a href="{{ url_for('team_info', team_id=game_data['home_team']['id']) }}">
             <img class="team-logo" src="/static/images/{{ game_data.home_team.name }}.png" alt="{{ game_data.home_team.full_name }}">
+          </a>
             vs.
+            <a href="{{ url_for('team_info', team_id=game_data['visitor_team']['id']) }}">
             <img class="team-logo" src="/static/images/{{ game_data.visitor_team.name }}.png" alt="{{ game_data.visitor_team.full_name }}">
+          </a>
           </h2>
           <p>Date: {{ game_data.date[:10] }} Season: {{ game_data.season }}</p>
           <p>
@@ -39,14 +51,14 @@
 
     <div class="card mt-4">
       <div class="card-body">
-        <h2 class="card-title">Search for a Player: </h2>
+        <h2 class="card-title">Search by Player Name: </h2>
         <form method="POST">
           {{ player_form.csrf_token }}
           {{ player_form.player_id(size=8) }}
           {{ player_form.submit }}
         </form>
 
-        <h2 class="card-title">Search for a Team: </h2>
+        <h2 class="card-title">Search by Team Id: </h2>
         <form method="POST">
           {{ team_form.csrf_token }}
           {{ team_form.team_id(size=8) }}

@@ -41,16 +41,16 @@
     <div class="container mb-4">  
       <div class="card mt-4">
         <div class="card-body">
-          <h2 class="card-title">Player Information:</h2>
+          <h2 class="card-title">Search Results:</h2>
           <ul class="list-group">
             {% if data %}
-              <p class="card-text">First Name: {{ data['first_name'] }}</p>
-              <p class="card-text">Last Name: {{ data['last_name'] }}</p>
-              <p class="card-text">Position: {{ data['position'] }}</p>
-              <p class="card-text">Height: {{ data['height_feet'] }} feet {{ data['height_inches'] }} inches</p>
-              <p class="card-text">Weight: {{ data['weight_pounds'] }} pounds</p>
-              <p class="card-text">Team: {{ data['team']['full_name'] }}</p>
-              <img class="team-logo" src="/static/images/{{ data['team']['name'] }}.png">
+              {% for player in data %}
+                <li class="list-group-item">
+                  <a href="{{ url_for('find_player', player_id=player['id']) }}">
+                    <p class="card-text">{{ player['first_name'] }}, {{ player['last_name'] }}</p>
+                  </a>
+                </li>
+              {% endfor %}
             {% else %}
               <p class="card-text">No data</p>
             {% endif %}
