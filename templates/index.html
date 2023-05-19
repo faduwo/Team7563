@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>CST 205 Final Project</title>
+  <link rel="stylesheet" href="static/style.css">
+  {{ bootstrap.load_css() }}
+</head>
+<body>
+  <div class="background-image"></div>
+  <div class="container">
+    <div class="header">
+      <h1>Welcome To The NBA Optimizer</h1>
+      <p>Have Fun!!</p>
+      <a href="{{ url_for('player') }}" class="header-link">Random Player</a>
+      <a href="{{ url_for('teams') }}" class="header-link">View Teams</a>
+    </div>
+
+    <div class="content">
+      <div class="blueBox">
+        <h3>Game of the Day</h3>
+        {% if game_data %}
+          <h2>
+            <img class="team-logo" src="/static/images/{{ game_data.home_team.name }}.png" alt="{{ game_data.home_team.full_name }}">
+            vs.
+            <img class="team-logo" src="/static/images/{{ game_data.visitor_team.name }}.png" alt="{{ game_data.visitor_team.full_name }}">
+          </h2>
+          <p>Date: {{ game_data.date[:10] }} Season: {{ game_data.season }}</p>
+          <p>
+            <span class="team-score">{{ game_data.home_team_score }}</span> -
+            <span class="team-score">{{ game_data.visitor_team_score }}</span>
+          </p>
+        {% else %}
+          <p>No game data available</p>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="card mt-4">
+      <div class="card-body">
+        <h2 class="card-title">Search for a Player: </h2>
+        <form method="POST">
+          {{ player_form.csrf_token }}
+          {{ player_form.player_id(size=8) }}
+          {{ player_form.submit }}
+        </form>
+
+        <h2 class="card-title">Search for a Team: </h2>
+        <form method="POST">
+          {{ team_form.csrf_token }}
+          {{ team_form.team_id(size=8) }}
+          {{ team_form.submit }}
+        </form>
+      </div>
+    </div>
+
+    <div class="footer"></div>
+  </div>
+</body>
+</html>
